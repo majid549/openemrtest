@@ -1,0 +1,14 @@
+FROM centos:7
+
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+RUN yum install php55w php55w-opcache -y
+RUN cd ~
+RUN yum install wget -y
+RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm"
+RUN yum localinstall jre-8u60-linux-x64.rpm -y
+RUN export JAVA_HOME=/usr/java/jdk1.8.0_60/jre
+RUN wget http://redrockdigimark.com/apachemirror/tomcat/tomcat-8/v8.5.6/bin/apache-tomcat-8.5.6.tar.gz
+RUN tar zxvf apache-tomcat-8.5.6.tar.gz
+RUN pwd
+RUN /bin/bash apache-tomcat-8.5.6/bin/startup.sh
